@@ -11,11 +11,18 @@ import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
-export function DatePickerWithRange({ className }: React.HTMLAttributes<HTMLDivElement>) {
+export function DatePickerWithRange({ className, onChange }: { className?: string; onChange?: (date: DateRange) => void }) {
+	const cdate = new Date();
 	const [date, setDate] = React.useState<DateRange | undefined>({
-		from: new Date(2022, 0, 20),
-		to: addDays(new Date(2022, 0, 20), 20),
+		from: new Date(cdate.getFullYear(), cdate.getMonth(), 1),
+		to: addDays(new Date(cdate.getFullYear(), cdate.getMonth() + 1, 1), -1),
 	});
+
+	React.useEffect(() => {
+		if (!date) return;
+
+		onChange?.(date);
+	}, [date]);
 
 	return (
 		<div className={cn('grid gap-2', className)}>
@@ -32,7 +39,7 @@ export function DatePickerWithRange({ className }: React.HTMLAttributes<HTMLDivE
 								format(date.from, 'L, d, y', { locale: es })
 							)
 						) : (
-							<span>Pick a date</span>
+							<span>Seleccione una fecha</span>
 						)}
 					</Button>
 				</PopoverTrigger>
