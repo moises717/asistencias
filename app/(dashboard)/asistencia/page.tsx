@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { addDays, format } from 'date-fns';
+import { TemplateHandler } from 'easy-template-x';
 
 import { type DateRange } from 'react-day-picker';
 import { type Miembro } from '@/app/(dashboard)/miembros/page';
@@ -57,11 +58,48 @@ const Asistencias = () => {
 		getMiembros();
 	}, [date]);
 
+	const exportar = async () => {
+		const data = {
+			Asistentes: [
+				...asistencias.map(({ expand: { miembro }, fecha }) => ({
+					nombre: miembro.nombre,
+					apellido: miembro.apellido,
+					fecha: fecha,
+				})),
+			],
+			fecha: currentDate,
+		};
+
+		const response = await fetch('/asistencia-template.docx');
+		const templateFile = await response.blob();
+
+		const handler = new TemplateHandler();
+		const doc = await handler.process(templateFile, data);
+
+		saveFile(`asistencia-${currentDate}.docx`, doc);
+	};
+
+	function saveFile(filename: string, blob: Blob) {
+		const blobUrl = URL.createObjectURL(blob);
+		let link = document.createElement('a') as HTMLAnchorElement | null;
+		if (link === null) return;
+		link.download = filename;
+		link.href = blobUrl;
+		document.body.appendChild(link);
+		link.click();
+		setTimeout(() => {
+			if (link === null) return;
+			link.remove();
+			window.URL.revokeObjectURL(blobUrl);
+			link = null;
+		}, 0);
+	}
+
 	return (
 		<div>
 			<div className='py-3 flex'>
 				<DatePickerWithRange onChange={setDate} className='w-full' />
-				<Button className='ml-2 flex justify-between gap-1'>
+				<Button className='ml-2 flex justify-between gap-1' onClick={exportar}>
 					Exportar <IconExcel className='w-4 h-4 fill-white' />
 				</Button>
 			</div>
