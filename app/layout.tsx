@@ -7,6 +7,10 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
 	title: 'Asistencia iglesia el de Dios el cordero',
 	description: 'Asistencia iglesia el de Dios el cordero',
+	manifest: '/manifest.json',
+	icons: {
+		apple: '/icon.png',
+	},
 };
 
 export default function RootLayout({
