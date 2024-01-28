@@ -1,4 +1,5 @@
 import { Navbar } from '../../components/navbar';
+import { Toaster } from '../../components/ui/sonner';
 
 export default function Template({ children }: { children: React.ReactNode }) {
 	return (
@@ -9,6 +10,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
 					{children}
 				</div>
 			</div>
+			<Toaster />
 		</div>
 	);
 }

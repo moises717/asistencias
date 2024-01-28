@@ -106,7 +106,7 @@ const Asistencias = () => {
 				</Button>
 			</div>
 
-			<Table className='border w-full '>
+			<Table className='border w-full mt-3'>
 				<TableCaption>Lista de miembros.</TableCaption>
 				<TableHeader>
 					<TableRow>
