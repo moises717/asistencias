@@ -9,7 +9,7 @@ import { type Miembro } from '@/app/(dashboard)/miembros/page';
 import { pb } from '@/lib/pb';
 
 import { DatePickerWithRange } from '@/components/DatePicker';
-import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { IconExcel } from '@/components/icons';

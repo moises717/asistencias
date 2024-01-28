@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { CheckedState } from '@radix-ui/react-checkbox';
 import { useDebounce } from 'use-debounce';
 
-import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { pb } from '@/lib/pb';
 import { type Miembro } from '@/app/(dashboard)/miembros/page';
@@ -116,12 +116,6 @@ export const MemberCheckList = () => {
 						);
 					})}
 				</TableBody>
-				<TableFooter>
-					<TableRow>
-						<TableCell colSpan={3}>Total Presentes</TableCell>
-						<TableCell>96</TableCell>
-					</TableRow>
-				</TableFooter>
 			</Table>
 		</div>
 	);

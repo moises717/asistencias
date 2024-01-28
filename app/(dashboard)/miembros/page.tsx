@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { pb } from '@/lib/pb';
 
@@ -51,12 +51,6 @@ export default function Home() {
 					</TableRow>
 				))}
 			</TableBody>
-			<TableFooter>
-				<TableRow>
-					<TableCell colSpan={3}>Total Presentes</TableCell>
-					<TableCell>96</TableCell>
-				</TableRow>
-			</TableFooter>
 		</Table>
 	);
 }
