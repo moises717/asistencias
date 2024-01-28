@@ -18,6 +18,7 @@ export interface Asistencia {
 	id: string;
 	miembro: string;
 	presente: boolean;
+	numero_asistencias: number;
 	fecha: string;
 	expand: {
 		miembro: Miembro;
@@ -45,7 +46,7 @@ const Asistencias = () => {
 			endTime.setHours(23, 59, 59, 999);
 			let endTimeString: string = endTime.toISOString().replace('T', ' ');
 
-			const data = await pb.collection<Asistencia>('asistencias').getFullList({
+			const data = await pb.collection<Asistencia>('asistencias_miembros').getFullList({
 				expand: 'miembro',
 				filter: pb.filter(`created > {:from} && created < {:to}`, {
 					from: startTimeString,
@@ -61,9 +62,10 @@ const Asistencias = () => {
 	const exportar = async () => {
 		const data = {
 			Asistentes: [
-				...asistencias.map(({ expand: { miembro } }) => ({
+				...asistencias.map(({ expand: { miembro }, numero_asistencias }) => ({
 					nombre: miembro.nombre,
 					apellido: miembro.apellido,
+					asistencias: numero_asistencias,
 				})),
 			],
 			inicio: format(date?.from || new Date(), 'LL, dd, yyy'),
@@ -129,12 +131,6 @@ const Asistencias = () => {
 						</TableRow>
 					))}
 				</TableBody>
-				<TableFooter>
-					<TableRow>
-						<TableCell colSpan={3}>Total Presentes</TableCell>
-						<TableCell>96</TableCell>
-					</TableRow>
-				</TableFooter>
 			</Table>
 		</div>
 	);
