@@ -83,8 +83,9 @@ export const MemberCheckList = () => {
 
 	return (
 		<div>
-			<div className='md:p-3 pb-2'>
+			<div className=' pb-2 flex md:justify-between gap-3'>
 				<Input placeholder='Buscar miembro' className='md:w-[190px]' value={filterParams} onChange={e => setFilterParams(e.target.value)} />
+				<h1 className='font-semibold self-center text-[0.7em] md:text-md'>Registrar Asistencia - {format(new Date(), 'yyyy-MM-dd')}</h1>
 			</div>
 			<Table className='border w-full '>
 				<TableCaption>Lista de miembros.</TableCaption>

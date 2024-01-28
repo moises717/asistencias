@@ -101,7 +101,7 @@ const Asistencias = () => {
 		<div>
 			<div className='flex pb-2 gap-1 flex-col sm:flex-row'>
 				<DatePickerWithRange onChange={setDate} className='w-full' />
-				<Button className='flex justify-between gap-1' onClick={exportar}>
+				<Button className='flex justify-between gap-1 absolute rounded-full bottom-4 right-4' onClick={exportar}>
 					Exportar <IconExcel className='w-4 h-4 fill-white' />
 				</Button>
 			</div>
