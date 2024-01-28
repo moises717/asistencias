@@ -7,12 +7,7 @@ import { IconExcel } from '../icons';
 
 export const Navbar = () => {
 	return (
-		<div className='w-full flex pb-2 gap-2'>
-			<Link href='/miembros/agregar-miembro'>
-				<Button size='sm' className='flex gap-1 '>
-					<span className='hidden md:block'>Nuevo miembro </span> <PlusCircledIcon />
-				</Button>
-			</Link>
+		<div className='w-full flex pb-2 gap-2 justify-end'>
 			<Link href='/miembros'>
 				<Button size='sm' variant='secondary' className='flex gap-1'>
 					<span className='hidden md:block'>Miembros </span> <ListBulletIcon />
@@ -28,6 +23,11 @@ export const Navbar = () => {
 				<Button size='sm' variant='secondary' className='flex gap-1 '>
 					<span className='hidden md:block'>Registrar asistencia</span>
 					<PersonIcon />
+				</Button>
+			</Link>
+			<Link href='/miembros/agregar-miembro'>
+				<Button size='sm' className='flex gap-1 '>
+					<span className='hidden md:block'>Nuevo miembro </span> <PlusCircledIcon />
 				</Button>
 			</Link>
 		</div>
