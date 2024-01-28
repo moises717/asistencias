@@ -4,7 +4,7 @@ import { addDays, format } from 'date-fns';
 import { TemplateHandler } from 'easy-template-x';
 
 import { type DateRange } from 'react-day-picker';
-import { type Miembro } from '@/app/(dashboard)/miembros/page';
+import { type Miembro } from '@/app/inicio/page';
 
 import { pb } from '@/lib/pb';
 
@@ -12,7 +12,7 @@ import { DatePickerWithRange } from '@/components/DatePicker';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { IconExcel } from '@/components/icons';
+import { IconFile } from '@/components/icons';
 
 export interface Asistencia {
 	id: string;
@@ -99,14 +99,14 @@ const Asistencias = () => {
 
 	return (
 		<div>
-			<div className='flex pb-2 gap-1 flex-col sm:flex-row'>
+			<div className='flex pb-2 gap-3 mt-3 flex-col sm:flex-row'>
 				<DatePickerWithRange onChange={setDate} className='w-full' />
-				<Button className='flex justify-between gap-1 absolute rounded-full bottom-4 right-36' onClick={exportar}>
-					Exportar <IconExcel className='w-4 h-4 fill-white' />
+				<Button variant='success' className='flex justify-between gap-1' onClick={exportar}>
+					Exportar <IconFile className='w-4 h-4 fill-white' />
 				</Button>
 			</div>
 
-			<Table className='border w-full mt-3'>
+			<Table className='border w-full mt-6'>
 				<TableCaption>Lista de miembros.</TableCaption>
 				<TableHeader>
 					<TableRow>
