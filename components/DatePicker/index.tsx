@@ -33,10 +33,10 @@ export function DatePickerWithRange({ className, onChange }: { className?: strin
 						{date?.from ? (
 							date.to ? (
 								<>
-									{format(date.from, 'L, d, y', { locale: es })} - {format(date.to, 'L, d, y', { locale: es })}
+									{format(date.from, 'LL, dd, yyyy', { locale: es })} - {format(date.to, 'LL, dd, yyyy', { locale: es })}
 								</>
 							) : (
-								format(date.from, 'L, d, y', { locale: es })
+								format(date.from, 'LL, dd, yyyy', { locale: es })
 							)
 						) : (
 							<span>Seleccione una fecha</span>

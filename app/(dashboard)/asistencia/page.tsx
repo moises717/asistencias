@@ -61,13 +61,13 @@ const Asistencias = () => {
 	const exportar = async () => {
 		const data = {
 			Asistentes: [
-				...asistencias.map(({ expand: { miembro }, fecha }) => ({
+				...asistencias.map(({ expand: { miembro } }) => ({
 					nombre: miembro.nombre,
 					apellido: miembro.apellido,
-					fecha: fecha,
 				})),
 			],
-			fecha: currentDate,
+			inicio: format(date?.from || new Date(), 'LL, dd, yyy'),
+			fin: format(date?.to || new Date(), 'LL, dd, yyyy'),
 		};
 
 		const response = await fetch('/asistencia-template.docx');
