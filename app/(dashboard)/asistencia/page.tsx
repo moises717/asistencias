@@ -113,11 +113,11 @@ const Asistencias = () => {
 						<TableHead>Imagen</TableHead>
 						<TableHead>Nombre</TableHead>
 						<TableHead>Apellido</TableHead>
-						<TableHead align='right'>Fecha</TableHead>
+						<TableHead align='right'>Asistencias</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					{asistencias.map(({ expand: { miembro }, fecha }) => (
+					{asistencias.map(({ expand: { miembro }, numero_asistencias }) => (
 						<TableRow key={miembro.nombre}>
 							<TableCell>
 								<Avatar>
@@ -127,7 +127,7 @@ const Asistencias = () => {
 							</TableCell>
 							<TableCell>{miembro.nombre}</TableCell>
 							<TableCell>{miembro.apellido}</TableCell>
-							<TableCell>{fecha}</TableCell>
+							<TableCell>{numero_asistencias}</TableCell>
 						</TableRow>
 					))}
 				</TableBody>
