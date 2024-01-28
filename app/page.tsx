@@ -18,7 +18,7 @@ const Login = () => {
 	const handleAuth = async () => {
 		const result = await pb.collection('users').authWithPassword(user.username, user.password);
 
-		if (result) return navigate.push('/miembros');
+		if (result) return navigate.push('/inicio');
 	};
 
 	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +32,7 @@ const Login = () => {
 		const checkUser = async () => {
 			const result = pb.authStore.isValid;
 
-			if (result) return navigate.push('/miembros');
+			if (result) return navigate.push('/inicio');
 		};
 
 		checkUser();

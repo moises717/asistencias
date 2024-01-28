@@ -8,24 +8,24 @@ import { IconExcel } from '../icons';
 export const Navbar = () => {
 	return (
 		<div className='w-full flex pb-2 gap-4 justify-end md:justify-between'>
-			<Link href='/miembros'>
+			<Link href='/'>
 				<Button variant='secondary' className='flex gap-1'>
 					<span className='hidden sm:block'>Miembros </span> <ListBulletIcon />
 				</Button>
 			</Link>
-			<Link href='/asistencia'>
+			<Link href='/inicio/asistencia'>
 				<Button variant='secondary' className='flex gap-1 '>
 					<span className='hidden sm:block'>Reportes</span>
 					<IconExcel className='w-4 h-4' />
 				</Button>
 			</Link>
-			<Link href='/asistencia/registrar'>
+			<Link href='/inicio/asistencia/registrar'>
 				<Button variant='secondary' className='flex gap-1 '>
 					<span className='hidden sm:block'>Registrar asistencia</span>
 					<PersonIcon />
 				</Button>
 			</Link>
-			<Link href='/miembros/agregar-miembro'>
+			<Link href='/inicio/agregar-miembro'>
 				<Button className='flex gap-1 '>
 					<span className='hidden sm:block'>Nuevo miembro </span> <PlusCircledIcon />
 				</Button>

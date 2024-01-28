@@ -7,8 +7,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { pb } from '@/lib/pb';
+import { PlusIcon } from '@radix-ui/react-icons';
+import { Modal } from '@/components/Modal';
 
-function AddMember() {
+function AddMemberModal() {
 	const [member, setMember] = useState({
 		nombre: '',
 		apellido: '',
@@ -27,11 +29,11 @@ function AddMember() {
 	};
 
 	return (
-		<div className='w-full h-[calc(100vh-200px)] flex items-center justify-center'>
-			<Card className='w-[350px]'>
-				<CardHeader>
-					<CardTitle>Agregar Miembro</CardTitle>
-					<CardDescription>Ingresa los datos del miembro que deseas agregar al equipo.</CardDescription>
+		<Modal>
+			<Card className='sm:w-[350px] w-full border-none shadow-none'>
+				<CardHeader className='flex flex-col gap-2'>
+					<CardTitle className='text-lg'>Agregar Miembro</CardTitle>
+					<CardDescription className='text-md'>Ingresa los datos del miembro que deseas agregar al equipo.</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<form>
@@ -48,13 +50,13 @@ function AddMember() {
 					</form>
 				</CardContent>
 				<CardFooter className='flex justify-between'>
-					<Button className='w-full' onClick={handleCreateMember}>
-						Crear miembro
+					<Button className='w-full flex gap-2' onClick={handleCreateMember}>
+						Crear miembro {<PlusIcon className='w-4 h-4 fill-white' />}
 					</Button>
 				</CardFooter>
 			</Card>
-		</div>
+		</Modal>
 	);
 }
 
-export default AddMember;
+export default AddMemberModal;
