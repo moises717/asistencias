@@ -40,7 +40,7 @@ const Login = () => {
 
 	return (
 		<div className='flex justify-center items-center w-full h-screen p-3'>
-			<Card className='md:w-[350px] w-full'>
+			<Card className='md:w-[350px] w-full border-none shadow-none sm:shadow sm:border-1 sm:border-solid'>
 				<CardHeader>
 					<CardTitle>Iniciar Sesión</CardTitle>
 					<CardDescription>Usuarios iglesia de Dios el cordero.</CardDescription>
