@@ -7,9 +7,9 @@ import { useDebounce } from 'use-debounce';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { pb } from '@/lib/pb';
-import { type Miembro } from '@/app/(dashboard)/miembros/page';
+import { type Miembro } from '@/app/inicio/page';
 import { Checkbox } from '@/components/ui/checkbox';
-import { type Asistencia } from '@/app/(dashboard)/asistencia/page';
+import { type Asistencia } from '@/app/inicio/asistencia/page';
 import { Input } from '@/components/ui/input';
 
 export const MemberCheckList = () => {
