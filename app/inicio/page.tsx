@@ -41,8 +41,11 @@ export default function Home() {
 					<TableRow key={nombre}>
 						<TableCell>
 							<Avatar>
-								<AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
-								<AvatarFallback>CN</AvatarFallback>
+								<AvatarImage src='' alt={`${nombre} ${apellido}`} />
+								<AvatarFallback>
+									{nombre[0]}
+									{apellido[0]}
+								</AvatarFallback>
 							</Avatar>
 						</TableCell>
 						<TableCell>{nombre}</TableCell>

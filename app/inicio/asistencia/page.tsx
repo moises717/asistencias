@@ -121,8 +121,11 @@ const Asistencias = () => {
 						<TableRow key={miembro.nombre}>
 							<TableCell>
 								<Avatar>
-									<AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
-									<AvatarFallback>CN</AvatarFallback>
+									<AvatarImage src='' alt={`${miembro.nombre} ${miembro.apellido}`} />
+									<AvatarFallback>
+										{miembro.nombre[0]}
+										{miembro.apellido[0]}
+									</AvatarFallback>
 								</Avatar>
 							</TableCell>
 							<TableCell>{miembro.nombre}</TableCell>
