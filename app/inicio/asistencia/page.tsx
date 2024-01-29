@@ -1,11 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { addDays, format } from 'date-fns';
-import { TemplateHandler } from 'easy-template-x';
 
 import { type DateRange } from 'react-day-picker';
-import { type Miembro } from '@/app/inicio/page';
 
+import { type Miembro } from '@/app/inicio/page';
 import { pb } from '@/lib/pb';
 
 import { DatePickerWithRange } from '@/components/DatePicker';
@@ -13,6 +12,14 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { IconFile } from '@/components/icons';
+import dynamic from 'next/dynamic';
+
+const PDFDownloadLink = dynamic(() => import('@react-pdf/renderer').then(mod => mod.PDFDownloadLink), {
+	ssr: false,
+	loading: () => <p>Loading...</p>,
+});
+
+import { Pdf } from '@/components/pdf';
 
 export interface Asistencia {
 	id: string;
@@ -27,11 +34,13 @@ export interface Asistencia {
 
 const Asistencias = () => {
 	const [asistencias, setAsistencia] = useState<Asistencia[]>([]);
-	const currentDate = format(new Date(), 'L, d, y');
+	const currentDate = format(new Date(), 'LL, dd, yyyy');
 	const [date, setDate] = useState<DateRange | undefined>({
 		from: new Date(currentDate),
 		to: addDays(new Date(currentDate), 1),
 	});
+
+	const dateRange = date?.from && date?.to ? `${format(date?.from, 'LL, dd, yyyy')} - ${format(date?.to, 'LL, dd, yyyy')}` : '';
 
 	useEffect(() => {
 		const getMiembros = async () => {
@@ -59,51 +68,23 @@ const Asistencias = () => {
 		getMiembros();
 	}, [date]);
 
-	const exportar = async () => {
-		const data = {
-			Asistentes: [
-				...asistencias.map(({ expand: { miembro }, numero_asistencias }) => ({
-					nombre: miembro.nombre,
-					apellido: miembro.apellido,
-					asistencias: numero_asistencias,
-				})),
-			],
-			inicio: format(date?.from || new Date(), 'LL, dd, yyy'),
-			fin: format(date?.to || new Date(), 'LL, dd, yyyy'),
-		};
-
-		const response = await fetch('/asistencia-template.docx');
-		const templateFile = await response.blob();
-
-		const handler = new TemplateHandler();
-		const doc = await handler.process(templateFile, data);
-
-		saveFile(`asistencia-${currentDate}.docx`, doc);
-	};
-
-	function saveFile(filename: string, blob: Blob) {
-		const blobUrl = URL.createObjectURL(blob);
-		let link = document.createElement('a') as HTMLAnchorElement | null;
-		if (link === null) return;
-		link.download = filename;
-		link.href = blobUrl;
-		document.body.appendChild(link);
-		link.click();
-		setTimeout(() => {
-			if (link === null) return;
-			link.remove();
-			window.URL.revokeObjectURL(blobUrl);
-			link = null;
-		}, 0);
-	}
-
 	return (
 		<div>
-			<div className='flex pb-2 gap-3 mt-3 flex-col sm:flex-row'>
+			<div className='flex pb-2 gap-3 mt-3 flex-col items-end sm:flex-row'>
 				<DatePickerWithRange onChange={setDate} className='w-full' />
-				<Button variant='success' className='flex justify-between gap-1' onClick={exportar}>
-					Exportar <IconFile className='w-4 h-4 fill-white' />
-				</Button>
+				<PDFDownloadLink document={<Pdf data={asistencias} dataRange={dateRange} />} fileName={`asistencias-${currentDate}`}>
+					{({ loading }) =>
+						loading ? (
+							<Button variant='success' className='flex justify-between gap-1'>
+								Generando..
+							</Button>
+						) : (
+							<Button variant='success' className='flex justify-between gap-1'>
+								Exportar <IconFile className='w-4 h-4 fill-white' />
+							</Button>
+						)
+					}
+				</PDFDownloadLink>
 			</div>
 
 			<Table className='border w-full mt-6'>
