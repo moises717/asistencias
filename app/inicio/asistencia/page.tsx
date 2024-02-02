@@ -55,6 +55,8 @@ const Asistencias = () => {
 			endTime.setHours(23, 59, 59, 999);
 			let endTimeString: string = endTime.toISOString().replace('T', ' ');
 
+			console.log('startTimeString', startTimeString, 'endTimeString', endTimeString);
+
 			const data = await pb.collection<Asistencia>('asistencias_miembros').getFullList({
 				expand: 'miembro',
 				filter: pb.filter(`created > {:from} && created < {:to}`, {
@@ -86,7 +88,11 @@ const Asistencias = () => {
 					}
 				</PDFDownloadLink>
 			</div>
-
+			<div>
+				<p>
+					Asistencias <b>{asistencias.length}</b>
+				</p>
+			</div>
 			<Table className='border w-full mt-6'>
 				<TableCaption>Lista de miembros.</TableCaption>
 				<TableHeader>
@@ -99,7 +105,7 @@ const Asistencias = () => {
 				</TableHeader>
 				<TableBody>
 					{asistencias.map(({ expand: { miembro }, numero_asistencias }) => (
-						<TableRow key={miembro.nombre}>
+						<TableRow key={miembro.id}>
 							<TableCell>
 								<Avatar>
 									<AvatarImage src='' alt={`${miembro.nombre} ${miembro.apellido}`} />
