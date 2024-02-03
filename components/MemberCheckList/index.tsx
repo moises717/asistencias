@@ -49,7 +49,7 @@ export const MemberCheckList = () => {
 		}
 
 		const asistencia = asistencias.find(asistencia => {
-			return asistencia.miembro === miembro.id;
+			return asistencia.id === miembro.id;
 		});
 
 		if (!asistencia) return;
@@ -99,7 +99,7 @@ export const MemberCheckList = () => {
 				</TableHeader>
 				<TableBody>
 					{miembros.map(miembro => {
-						const isChecked = asistencias.some(asistencia => asistencia.miembro === miembro.id);
+						const isChecked = asistencias.some(asistencia => asistencia.id === miembro.id);
 						return (
 							<TableRow key={miembro.id}>
 								<TableCell>

@@ -4,7 +4,6 @@ import { addDays, format } from 'date-fns';
 
 import { type DateRange } from 'react-day-picker';
 
-import { type Miembro } from '@/app/inicio/page';
 import { pb } from '@/lib/pb';
 
 import { DatePickerWithRange } from '@/components/DatePicker';
