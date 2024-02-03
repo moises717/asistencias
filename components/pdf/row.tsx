@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
 const InvoiceTableRow = ({ items }: { items: Asistencia[] }) => {
 	const rows = items.map(item => (
 		<View style={styles.row} key={item.id}>
-			<Text style={styles.nombre}>{item.expand.miembro.nombre}</Text>
-			<Text style={styles.apellido}>{item.expand.miembro.nombre}</Text>
+			<Text style={styles.nombre}>{item.nombre}</Text>
+			<Text style={styles.apellido}>{item.apellido}</Text>
 			<Text style={styles.asistencias}>{item.numero_asistencias}</Text>
 		</View>
 	));

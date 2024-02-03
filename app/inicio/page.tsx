@@ -37,8 +37,8 @@ export default function Home() {
 				</TableRow>
 			</TableHeader>
 			<TableBody>
-				{miembros.map(({ apellido, nombre, created }) => (
-					<TableRow key={nombre}>
+				{miembros.map(({ apellido, nombre, created, id }) => (
+					<TableRow key={id}>
 						<TableCell>
 							<Avatar>
 								<AvatarImage src='' alt={`${nombre} ${apellido}`} />

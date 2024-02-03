@@ -23,18 +23,15 @@ import { Pdf } from '@/components/pdf';
 
 export interface Asistencia {
 	id: string;
-	miembro: string;
-	presente: boolean;
-	numero_asistencias: number;
-	fecha: string;
-	expand: {
-		miembro: Miembro;
-	};
+	nombre: string;
+	apellido: string;
+	numero_asistencias: 0;
 }
 
 const Asistencias = () => {
 	const [asistencias, setAsistencia] = useState<Asistencia[]>([]);
-	const currentDate = format(new Date(), 'LL, dd, yyyy');
+	const currentDate = format(new Date(), 'yyyy-MM-dd');
+
 	const [date, setDate] = useState<DateRange | undefined>({
 		from: new Date(currentDate),
 		to: addDays(new Date(currentDate), 1),
@@ -46,24 +43,21 @@ const Asistencias = () => {
 		const getMiembros = async () => {
 			if (!date?.from) return;
 			if (!date?.to) return;
+			const from = format(date?.from, 'yyyy-MM-dd');
+			const to = format(date?.to, 'yyyy-MM-dd');
 
-			let beginTime = new Date(date?.from?.toString());
-			beginTime.setHours(0, 0, 0, 0);
-			let startTimeString: string = beginTime.toISOString().replace('T', ' ');
+			/** filter: pb.filter(`created > {:from} && created < {:to}`, {
+					from: `${from} 00:00:00.000Z`,
+					to: `${to} 23:59:59.999Z`,
+				}), */
 
-			let endTime = new Date(date?.to?.toString());
-			endTime.setHours(23, 59, 59, 999);
-			let endTimeString: string = endTime.toISOString().replace('T', ' ');
-
-			console.log('startTimeString', startTimeString, 'endTimeString', endTimeString);
-
-			const data = await pb.collection<Asistencia>('asistencias_miembros').getFullList({
-				expand: 'miembro',
-				filter: pb.filter(`created > {:from} && created < {:to}`, {
-					from: startTimeString,
-					to: endTimeString,
-				}),
+			const data = await pb.send<Asistencia[]>('reporte-asistencias', {
+				query: {
+					from: `${from} 00:00:00.000Z`,
+					to: `${to} 23:59:59.999Z`,
+				},
 			});
+
 			setAsistencia(data);
 		};
 
@@ -104,19 +98,19 @@ const Asistencias = () => {
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					{asistencias.map(({ expand: { miembro }, numero_asistencias }) => (
-						<TableRow key={miembro.id}>
+					{asistencias.map(({ numero_asistencias, id, apellido, nombre }) => (
+						<TableRow key={id}>
 							<TableCell>
 								<Avatar>
-									<AvatarImage src='' alt={`${miembro.nombre} ${miembro.apellido}`} />
+									<AvatarImage src='' alt={`${nombre} ${apellido}`} />
 									<AvatarFallback>
-										{miembro.nombre[0]}
-										{miembro.apellido[0]}
+										{nombre[0]}
+										{apellido[0]}
 									</AvatarFallback>
 								</Avatar>
 							</TableCell>
-							<TableCell>{miembro.nombre}</TableCell>
-							<TableCell>{miembro.apellido}</TableCell>
+							<TableCell>{nombre}</TableCell>
+							<TableCell>{apellido}</TableCell>
 							<TableCell>{numero_asistencias}</TableCell>
 						</TableRow>
 					))}
